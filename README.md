@@ -1,47 +1,19 @@
-# ⚡ RISC-V INT8 AI Accelerator
+# 🛠️ Verilog & Git Survival Guide
 
-A 32-bit RISC-V processor core (RV32I subset) integrated with a dedicated hardware **INT8 Multiply-Accumulate (MAC)** accelerator for edge AI inference.
-
-- **Developer:** Vinayreddy
-- **Tools:** Verilog HDL, Icarus Verilog, GTKWave
+Notes and lessons learned from building and simulating a RISC-V INT8 AI Accelerator on Windows using Icarus Verilog and GTKWave.
 
 ---
 
-## 🏗️ Hardware Architecture & Verification
+## 🚀 1. How to Run Verilog Simulations
 
-### 1. Full Top-Level Core Execution (`riscv_top.v`)
-Executes instructions end-to-end, showing register writeback for both standard arithmetic and custom MAC instructions.
-![Top-Level Core](assets/top_waveform.png)
-
----
-
-### 2. INT8 MAC Hardware Accelerator (`int8_mac.v`)
-Multiplies signed 8-bit activations and weights, accumulating into a 32-bit register.
-![INT8 MAC Simulation](assets/mac_waveform.png)
-
----
-
-### 3. Instruction Fetch & Control Decode (`pc_unit.v`, `control_unit.v`)
-Demonstrates PC sequencing, instruction ROM fetches, and control line decoding.
-![Fetch & Decode Simulation](assets/fetch_waveform.png)
-
----
-
-### 4. Datapath & ALU Logic (`alu.v`, `register_file.v`)
-Verifies immediate sign extension, 32-bit ALU operations, and zero detection.
-![ALU Datapath Simulation](assets/datapath_waveform.png)
-
----
-
-## 🚀 How to Run Simulations
-
+### Step A: Single Module / Submodule Test
+When testing just one block (like the INT8 MAC unit or Datapath):
 ```powershell
-# Top-Level Core Simulation
-iverilog -o sim_top.vvp alu.v control_unit.v instruction_memory.v pc_unit.v register_file.v int8_mac.v riscv_top.v tb_riscv_top.v
-vvp sim_top.vvp
-gtkwave riscv_top_sim.vcd
-
-# Dedicated INT8 MAC Unit Test
+# 1. Compile design + testbench into a simulation file
 iverilog -o sim_mac.vvp int8_mac.v tb_int8_mac.v
+
+# 2. Run simulation (this creates the .vcd waveform file)
 vvp sim_mac.vvp
+
+# 3. Open GTKWave
 gtkwave mac_waveform.vcd
