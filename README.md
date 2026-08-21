@@ -1,10 +1,10 @@
-# 🛠️ Verilog & Git Survival Guide
+#  Verilog & Git Survival Guide
 
 Notes and lessons learned from building and simulating a RISC-V INT8 AI Accelerator on Windows using Icarus Verilog and GTKWave.
 
 ---
 
-## 🚀 1. How to Run Verilog Simulations
+##  1. How to Run Verilog Simulations
 
 ### Step A: Single Module / Submodule Test
 When testing just one block (like the INT8 MAC unit or Datapath):
